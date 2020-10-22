@@ -4,7 +4,7 @@ version: '3.1'
 services:
 
   db:
-    image: mysql/mysql-server
+    image: mariadb
     # command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db_data:/var/lib/mysql
