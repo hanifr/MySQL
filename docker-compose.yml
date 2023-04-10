@@ -1,26 +1,42 @@
-# Use root/example as user/password credentials
-version: '3.1'
+version: "3"
 
 services:
+  backend:
+    image: nodered/node-red
+    restart: always
+    container_name: nr
+    ports:
+      - "1800:1880"
+    environment:
+      TZ: Asia/Kuala_Lumpur
+      environment:
+    networks:
+      - net-backend
+      - net-web
 
-  db:
+  mysql:
     image: mariadb
-    # command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
+    container_name: sql
     environment:
       MYSQL_ROOT_PASSWORD: c1vG7R34
-      MYSQL_DATABASE: samsmk3
+      MYSQL_DATABASE: tracker
       MYSQL_USER: digitalman
       MYSQL_PASSWORD: c1vG7R34
       TZ: Asia/Kuala_Lumpur
     ports:
-      - "3306:3306"
+      - "3300:3306"
+    networks:
+      - net-backend
+
+networks:
+  net-backend:
+    name: net-exp-db
+  net-web:
+    name: net-web-all
+
 volumes:
   db_data:
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
