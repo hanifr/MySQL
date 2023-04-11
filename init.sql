@@ -1,1 +1,3 @@
-CREATE TABLE users (user_id int NOT NULL AUTO_INCREMENT, fullName varchar(100) NOT NULL, username varchar(100) NOT NULL, email varchar(100) NOT NULL ,password varchar(300) NOT NULL, admin_id_users VARCHAR(100) DEFAULT NULL, role varchar(100) DEFAULT null, timestamp_user TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  UNIQUE KEY(user_id));
+-- CREATE TABLE users (user_id int NOT NULL AUTO_INCREMENT, fullName varchar(100) NOT NULL, username varchar(100) NOT NULL, email varchar(100) NOT NULL ,password varchar(300) NOT NULL, admin_id_users VARCHAR(100) DEFAULT NULL, role varchar(100) DEFAULT null, timestamp_user TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  UNIQUE KEY(user_id));
+
+CREATE TABLE bookdata ( Book_id int NOT NULL AUTO_INCREMENT, Book_name VARCHAR(150) NOT NULL, Book_Author VARCHAR(150) NOT NULL, publishedDate VARCHAR(150) NOT NULL, timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP )
