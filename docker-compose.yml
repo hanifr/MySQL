@@ -9,7 +9,6 @@ services:
       - "1800:1880"
     environment:
       TZ: Asia/Kuala_Lumpur
-      environment:
     networks:
       - net-backend
       - net-web
@@ -22,13 +21,13 @@ services:
     restart: always
     container_name: sql
     environment:
-      MYSQL_ROOT_PASSWORD: c1vG7R34
-      MYSQL_DATABASE: tracker
-      MYSQL_USER: digitalman
-      MYSQL_PASSWORD: c1vG7R34
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
       TZ: Asia/Kuala_Lumpur
     ports:
-      - "3300:3306"
+      - "${DB_PORT}:3306"
     networks:
       - net-backend
 
