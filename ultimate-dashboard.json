@@ -1,0 +1,954 @@
+[
+    {
+        "id": "4b869548c6741e1d",
+        "type": "mqtt in",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "topic": "ea/datc/s/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f77a3f58af749b8d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 420,
+        "y": 1380,
+        "wires": [
+            [
+                "be3ea7e096b4a9b9",
+                "e0d3b1994d309055",
+                "e7409ee612cb8816"
+            ]
+        ]
+    },
+    {
+        "id": "d3c2dcfed57adbdd",
+        "type": "mqtt out",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "topic": "ea/datc/s/data",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f77a3f58af749b8d",
+        "x": 680,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "20a66902b4b2b77e",
+        "type": "inject",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 560,
+        "wires": [
+            [
+                "d3c2dcfed57adbdd"
+            ]
+        ]
+    },
+    {
+        "id": "e0d3b1994d309055",
+        "type": "ui_gauge",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "group": "18246a2c0fbff20f",
+        "order": 4,
+        "width": 5,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{msg.payload.RH}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 680,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "be3ea7e096b4a9b9",
+        "type": "ui_gauge",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "group": "18246a2c0fbff20f",
+        "order": 1,
+        "width": 5,
+        "height": 4,
+        "gtype": "wave",
+        "title": "Temperature",
+        "label": "C",
+        "format": "{{msg.payload.TMP}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 670,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "162bb22097c958da",
+        "type": "mysql",
+        "z": "e54f1523af6a5ce2",
+        "mydb": "d1eec4667b23ef27",
+        "name": "sensor data",
+        "x": 790,
+        "y": 880,
+        "wires": [
+            [
+                "d4cf62e992401fd2"
+            ]
+        ]
+    },
+    {
+        "id": "5a8db5375b919a04",
+        "type": "function",
+        "z": "e54f1523af6a5ce2",
+        "name": "Create sensor_data",
+        "func": "msg.topic = \"CREATE TABLE sensor_data (TID VARCHAR(150) NOT NULL, TMP DECIMAL(16,2) DEFAULT '0.00' NOT NULL, RH DECIMAL(16,2) DEFAULT '0.00' NOT NULL, timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP )\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 880,
+        "wires": [
+            [
+                "162bb22097c958da"
+            ]
+        ]
+    },
+    {
+        "id": "97664d1bba830ac0",
+        "type": "inject",
+        "z": "e54f1523af6a5ce2",
+        "name": "CREATE table sensor_data",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 880,
+        "wires": [
+            [
+                "5a8db5375b919a04"
+            ]
+        ]
+    },
+    {
+        "id": "d4cf62e992401fd2",
+        "type": "debug",
+        "z": "e54f1523af6a5ce2",
+        "name": "debug 42",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "f1b823bf73a83ff0",
+        "type": "mqtt in",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "topic": "ea/datc/s/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f77a3f58af749b8d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 820,
+        "wires": [
+            [
+                "3dc9119c2b97e62b"
+            ]
+        ]
+    },
+    {
+        "id": "3dc9119c2b97e62b",
+        "type": "function",
+        "z": "e54f1523af6a5ce2",
+        "name": "Data Push",
+        "func": "msg.topic = \"INSERT INTO sensor_data (TID, TMP, RH) \" + \"VALUES ('\" + msg.payload.TID + \"', '\" + msg.payload.TMP + \"','\" + msg.payload.RH + \"');\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 820,
+        "wires": [
+            [
+                "162bb22097c958da"
+            ]
+        ]
+    },
+    {
+        "id": "7a1c1cb7960fa706",
+        "type": "inject",
+        "z": "e54f1523af6a5ce2",
+        "name": "Describe sensor_data",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Describe sensor_data",
+        "x": 520,
+        "y": 920,
+        "wires": [
+            [
+                "162bb22097c958da"
+            ]
+        ]
+    },
+    {
+        "id": "65706cd87047f6fd",
+        "type": "inject",
+        "z": "e54f1523af6a5ce2",
+        "name": "Drop table sensor_data",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Drop table sensor_data",
+        "x": 520,
+        "y": 960,
+        "wires": [
+            [
+                "162bb22097c958da"
+            ]
+        ]
+    },
+    {
+        "id": "7a52b2b95762e87d",
+        "type": "mqtt in",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "topic": "ea/datc/s/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f77a3f58af749b8d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 400,
+        "y": 620,
+        "wires": [
+            [
+                "1585a01bd9a70991"
+            ]
+        ]
+    },
+    {
+        "id": "1585a01bd9a70991",
+        "type": "debug",
+        "z": "e54f1523af6a5ce2",
+        "name": "debug 43",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "62d7c7dcee5fd161",
+        "type": "comment",
+        "z": "e54f1523af6a5ce2",
+        "name": "Data Push API",
+        "info": "",
+        "x": 540,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "e7af94ed52df03b4",
+        "type": "comment",
+        "z": "e54f1523af6a5ce2",
+        "name": "Display Sensor Data in a Dashboard",
+        "info": "",
+        "x": 500,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "e7409ee612cb8816",
+        "type": "debug",
+        "z": "e54f1523af6a5ce2",
+        "name": "debug 44",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "ea1b7d9ed1f9126b",
+        "type": "function",
+        "z": "e54f1523af6a5ce2",
+        "name": "Query All data ",
+        "func": "msg.topic = \"SELECT * FROM sensor_data\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 1120,
+        "wires": [
+            [
+                "162bb22097c958da"
+            ]
+        ]
+    },
+    {
+        "id": "68d199fb68c0a791",
+        "type": "inject",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 1120,
+        "wires": [
+            [
+                "ea1b7d9ed1f9126b"
+            ]
+        ]
+    },
+    {
+        "id": "af5d9c6614a4bd3b",
+        "type": "comment",
+        "z": "e54f1523af6a5ce2",
+        "name": "Query Data",
+        "info": "",
+        "x": 550,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "27142363aae31983",
+        "type": "function",
+        "z": "e54f1523af6a5ce2",
+        "name": "Hourly Trends",
+        "func": "msg.topic = \"SELECT DATE_FORMAT(timestamp, '%Y-%m-%d %H:00:00') as ts, AVG(TMP) as avg_TMP, MIN(TMP) as min_TMP, MAX(TMP) as max_TMP, AVG(RH) as avg_RH, MIN(RH) as min_RH, MAX(RH) as max_RH FROM sensor_data WHERE DATE(timestamp) = CURDATE() GROUP BY ts\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 1160,
+        "wires": [
+            [
+                "162bb22097c958da"
+            ]
+        ]
+    },
+    {
+        "id": "953331751bc1efa6",
+        "type": "inject",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 1160,
+        "wires": [
+            [
+                "27142363aae31983"
+            ]
+        ]
+    },
+    {
+        "id": "80476e4d.6f64a",
+        "type": "ui_chart",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "group": "18246a2c0fbff20f",
+        "order": 2,
+        "width": 9,
+        "height": 7,
+        "label": "Line Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "No Data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 770,
+        "y": 1840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f4e610a1.1c381",
+        "type": "ui_chart",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "group": "18246a2c0fbff20f",
+        "order": 3,
+        "width": 10,
+        "height": 7,
+        "label": "Bar Chart",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "No Data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 760,
+        "y": 1920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c6549407.0c1348",
+        "type": "function",
+        "z": "e54f1523af6a5ce2",
+        "name": "Build ChartData",
+        "func": "var m = {};\nm.labels = [];\nm.series = ['TMP (min)', 'TMP (avg)', 'TMP (max)', 'RH (min)', 'RH (avg)', 'RH (max)'];\nm.data = [[], [], [], [], [], []];\n\nfor (var i = 0; i < msg.payload.length; i++) {\n  var item = msg.payload[i];\n  m.labels.push(item.ts);\n\n  m.data[0].push(item.min_TMP);\n  m.data[1].push(item.avg_TMP);\n  m.data[2].push(item.max_TMP);\n  m.data[3].push(item.min_RH);\n  m.data[4].push(item.avg_RH);\n  m.data[5].push(item.max_RH);\n}\n\nreturn { payload: [m] };\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1880,
+        "wires": [
+            [
+                "80476e4d.6f64a",
+                "f4e610a1.1c381"
+            ]
+        ]
+    },
+    {
+        "id": "29cd8a13.ecade6",
+        "type": "ui_button",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "group": "18246a2c0fbff20f",
+        "order": 8,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "Clear All",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-2x fa-eraser",
+        "payload": "[]",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 140,
+        "y": 1880,
+        "wires": [
+            [
+                "df2536cccd2a649a"
+            ]
+        ]
+    },
+    {
+        "id": "ba9c53c24b88ae70",
+        "type": "ui_button",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "group": "18246a2c0fbff20f",
+        "order": 5,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "Hourly Query",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-2x fa-line-chart",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 130,
+        "y": 1680,
+        "wires": [
+            [
+                "b8392fc7452d5fd8"
+            ]
+        ]
+    },
+    {
+        "id": "7d4bcb63bfda4ce8",
+        "type": "mysql",
+        "z": "e54f1523af6a5ce2",
+        "mydb": "d1eec4667b23ef27",
+        "name": "sensor data",
+        "x": 490,
+        "y": 1740,
+        "wires": [
+            [
+                "b082e5887117a69d",
+                "d5c570b3ba1eaccb"
+            ]
+        ]
+    },
+    {
+        "id": "b8392fc7452d5fd8",
+        "type": "function",
+        "z": "e54f1523af6a5ce2",
+        "name": "Hourly Trends",
+        "func": "msg.topic = \"SELECT DATE_FORMAT(timestamp, '%Y-%m-%d %H:00:00') as ts, AVG(TMP) as avg_TMP, MIN(TMP) as min_TMP, MAX(TMP) as max_TMP, AVG(RH) as avg_RH, MIN(RH) as min_RH, MAX(RH) as max_RH FROM sensor_data WHERE DATE(timestamp) = CURDATE() GROUP BY ts\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 1680,
+        "wires": [
+            [
+                "6e1bd306ae72596b"
+            ]
+        ]
+    },
+    {
+        "id": "b082e5887117a69d",
+        "type": "ui_table",
+        "z": "e54f1523af6a5ce2",
+        "group": "18246a2c0fbff20f",
+        "name": "",
+        "order": 9,
+        "width": 24,
+        "height": 5,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 750,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "c51101a7b31a910b",
+        "type": "link out",
+        "z": "e54f1523af6a5ce2",
+        "name": "Hourly_Out",
+        "mode": "link",
+        "links": [
+            "d502bbb6e086f972"
+        ],
+        "x": 845,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "d502bbb6e086f972",
+        "type": "link in",
+        "z": "e54f1523af6a5ce2",
+        "name": "Query_In",
+        "links": [
+            "c51101a7b31a910b",
+            "d5c570b3ba1eaccb"
+        ],
+        "x": 335,
+        "y": 1880,
+        "wires": [
+            [
+                "c6549407.0c1348",
+                "58ceb2cf5aa2e8b1"
+            ]
+        ]
+    },
+    {
+        "id": "eb5171a1810ec70a",
+        "type": "function",
+        "z": "e54f1523af6a5ce2",
+        "name": "Weekly Query",
+        "func": "msg.topic = \"SELECT DAYNAME(timestamp) as ts, AVG(TMP) as avg_TMP, MIN(TMP) as min_TMP, MAX(TMP) as max_TMP, AVG(RH) as avg_RH, MIN(RH) as min_RH, MAX(RH) as max_RH FROM sensor_data  WHERE timestamp >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)  GROUP BY ts ORDER BY timestamp;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 1740,
+        "wires": [
+            [
+                "7d4bcb63bfda4ce8"
+            ]
+        ]
+    },
+    {
+        "id": "9bb7a0a4a19cd84a",
+        "type": "ui_button",
+        "z": "e54f1523af6a5ce2",
+        "name": "",
+        "group": "18246a2c0fbff20f",
+        "order": 6,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "Weekly Query",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-2x fa-line-chart",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 120,
+        "y": 1740,
+        "wires": [
+            [
+                "eb5171a1810ec70a"
+            ]
+        ]
+    },
+    {
+        "id": "6e1bd306ae72596b",
+        "type": "mysql",
+        "z": "e54f1523af6a5ce2",
+        "mydb": "d1eec4667b23ef27",
+        "name": "sensor data",
+        "x": 490,
+        "y": 1680,
+        "wires": [
+            [
+                "b082e5887117a69d",
+                "d73c7f3a.a3cb78"
+            ]
+        ]
+    },
+    {
+        "id": "d73c7f3a.a3cb78",
+        "type": "function",
+        "z": "e54f1523af6a5ce2",
+        "name": "Format Timestamp",
+        "func": "var newPayload = msg.payload.map(function(item){\n    var d = new Date(item.ts);\n    item.ts = d.getHours() + ':00';\n    return item;\n});\nmsg.payload = newPayload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 1680,
+        "wires": [
+            [
+                "c51101a7b31a910b"
+            ]
+        ]
+    },
+    {
+        "id": "d5c570b3ba1eaccb",
+        "type": "link out",
+        "z": "e54f1523af6a5ce2",
+        "name": "Weekly_Out",
+        "mode": "link",
+        "links": [
+            "d502bbb6e086f972"
+        ],
+        "x": 615,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "68007e70bb0a311f",
+        "type": "comment",
+        "z": "e54f1523af6a5ce2",
+        "name": "Building Chart from Database Query",
+        "info": "",
+        "x": 500,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "7193306d623420f4",
+        "type": "ui_template",
+        "z": "e54f1523af6a5ce2",
+        "group": "18246a2c0fbff20f",
+        "name": "",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 760,
+        "y": 2080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "58ceb2cf5aa2e8b1",
+        "type": "function",
+        "z": "e54f1523af6a5ce2",
+        "name": "Prepare CSV",
+        "func": "const fields = ['ts', 'avg_TMP', 'min_TMP', 'max_TMP', 'avg_RH', 'min_RH', 'max_RH'];\nconst data = msg.payload;\nconst csvData = [fields.join(','), ...data.map(item => fields.map(field => item[field]).join(','))].join('\\n');\nconst encodedData = encodeURIComponent(csvData);\nmsg.payload = `<a href='data:text/csv;charset=utf-8,${encodedData}' download='data.csv'>Download CSV</a>`;\nreturn msg;\n\n\n// const fields = ['ts', 'avg_TMP', 'min_TMP', 'max_TMP', 'avg_RH', 'min_RH', 'max_RH'];\n// const data = msg.payload;  \n//   if (!data || !Array.isArray(data) || data.length === 0) {\n//     throw new Error('Invalid input data');\n//   }\n// const csvData = [fields.join(','), ...data.map(item => fields.map(field => item[field]).join(','))].join('\\n');\n// const encodedData = encodeURIComponent(csvData);\n// msg.payload  `<a href='data:text/csv;charset=utf-8,${encodedData}' download='data.csv'>Download CSV</a>`;\n// return msg;\n\n// // Example usage\n// const data = [\n//   { ts: '2023-04-22', avg_TMP: 25, min_TMP: 23, max_TMP: 28, avg_RH: 60, min_RH: 50, max_RH: 70 },\n//   { ts: '2023-04-23', avg_TMP: 26, min_TMP: 24, max_TMP: 29, avg_RH: 65, min_RH: 55, max_RH: 75 },\n//   { ts: '2023-04-24', avg_TMP: 27, min_TMP: 25, max_TMP: 30, avg_RH: 70, min_RH: 60, max_RH: 80 },\n// ];\n\n// const csvHtml = prepareCsvData(data);\n// console.log(csvHtml);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 2080,
+        "wires": [
+            [
+                "7193306d623420f4"
+            ]
+        ]
+    },
+    {
+        "id": "df2536cccd2a649a",
+        "type": "link out",
+        "z": "e54f1523af6a5ce2",
+        "name": "Clear_Out",
+        "mode": "link",
+        "links": [
+            "6943db3b44b599e4"
+        ],
+        "x": 255,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "6943db3b44b599e4",
+        "type": "link in",
+        "z": "e54f1523af6a5ce2",
+        "name": "Clear_In",
+        "links": [
+            "df2536cccd2a649a"
+        ],
+        "x": 545,
+        "y": 1920,
+        "wires": [
+            [
+                "80476e4d.6f64a",
+                "f4e610a1.1c381",
+                "7193306d623420f4",
+                "b082e5887117a69d"
+            ]
+        ]
+    },
+    {
+        "id": "3d7d8bedf59679a4",
+        "type": "comment",
+        "z": "e54f1523af6a5ce2",
+        "name": "Reporting Function using CSV data",
+        "info": "",
+        "x": 500,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "f77a3f58af749b8d",
+        "type": "mqtt-broker",
+        "name": "ZR",
+        "broker": "zr.txio.live",
+        "port": "1880",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "18246a2c0fbff20f",
+        "type": "ui_group",
+        "name": "Temperature and humidity monitoring",
+        "tab": "fb6fc3baacf6347f",
+        "order": 1,
+        "disp": false,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d1eec4667b23ef27",
+        "type": "MySQLdatabase",
+        "name": "UiTM",
+        "host": "txio.uitm.edu.my",
+        "port": "3080",
+        "db": "tracker",
+        "tz": "Asia/Kuala_Lumpur",
+        "charset": "UTF8"
+    },
+    {
+        "id": "fb6fc3baacf6347f",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
