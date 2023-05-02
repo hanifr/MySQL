@@ -30,7 +30,7 @@ if ! curl -sSL https://get.docker.com | sh; then
 fi
 
 sleep 2
-if ! apt-get install -y libffi-dev libssl-dev python3-pip && apt-get remove -y python-configparser; then
+if ! apt-get install -y libffi-dev libssl-dev python3-pip && apt-get remove -y python-configparser && pip3 install docker-compose; then
   echo "${_RED}ERROR: Failed to install required packages.${_RESET}" >&2
   exit 1
 fi
