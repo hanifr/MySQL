@@ -1,22 +1,53 @@
-# MySQL
- 
- To set up the environment, follow these steps:
+## MySQL
 
-1. Create a .env file in the same directory as the docker-compose.yml file with the following environment variables:
-    DB_NAME=your_database
-    DB_USER=your_username
-    DB_PASSWORD=your_password
-    DB_PORT=your_port_number
+To set up the environment, follow these steps:
 
-2. Run the following command to start the containers:
-    docker-compose up -d
+\`\`\`
+$ sudo -i
+$ git clone https://github.com/hanifr/MySQL.git
+$ cd MySQL
+$ chmod +x init.sh
+$ ./init.sh
+\`\`\`
 
-3. Access the Node-RED interface by navigating to http://localhost:1800 in your web browser.
+### What it does
 
-4. Use the MySQL database by connecting to the MySQL container using the following details:
-    - Host: localhost
-    - Port: ${DB_PORT}
-    - Database: ${DB_NAME}
-    - Username: ${DB_USER}
-    - Password: ${DB_PASSWORD}
+The \`init.sh\` script does the following:
+
+1. Installs Docker and Docker Compose libraries on the host machine.
+2. Creates a \`.env\` file in the same directory as the script.
+3. Adds the required environment variables to the \`.env\` file.
+4. Sets the file permissions of the \`.env\` file to be only readable by the current user.
+
+### Environment Variables
+
+The following environment variables are set in the \`.env\` file:
+
+- \`Host\`: The hostname for the database.
+- \`Port\`: The port number for the database.
+- \`Database\`: The name of the database.
+- \`Username\`: The username for the database.
+- \`Password\`: The password for the database.
+
+If you wish to change the above setup, execute the following command:
+
+\`\`\`
+$ nano init.sh
+\`\`\`
+
+Change the parameters as you wish.
+
+To start the containers, run the following command:
+
+\`\`\`
+docker-compose up -d
+\`\`\`
+
+To access the MySQL database, connect to the MySQL container using the following details:
+
+- Host: \`localhost\`
+- Port: \`\${DB_PORT}\`\`
+- Database: \`\${DB_NAME}\`\`
+- Username: \`\${DB_USER}\`\`
+- Password: \`${DB_PASSWORD}\`\`
 
