@@ -48,11 +48,10 @@ if ! touch .env; then
 fi
 
 # Add the required environment variables to the .env file
-echo "Host=localhost" >> .env
-echo "Port=3300" >> .env
-echo "Database=tracker" >> .env
-echo "Username=orangepi" >> .env
-echo "Password=orangepi" >> .env
+echo "DB_PORT=3300" >> .env
+echo "DB_NAME=tracker" >> .env
+echo "DB_USER=orangepi" >> .env
+echo "DB_PASSWORD=orangepi" >> .env
 
 # Make the .env file only readable by the current user
 if ! chmod 600 .env; then
