@@ -14,8 +14,10 @@ export const state = () => ({
     allUser:[],
     allUserTopic:[]
   },
-  sensorEndpoint: 'https://nr.txio.live/sensor/',
-  sensorQueryEndpoint: 'https://nr.txio.live/api/query'
+  // sensorEndpoint: 'https://nr.txio.live/sensor/',
+  // sensorQueryEndpoint: 'https://nr.txio.live/api/query'
+  sensorEndpoint: 'http://localhost:1800/sensor/',
+  sensorQueryEndpoint: 'http://localhost:1800/api/query/'
 });
 
 

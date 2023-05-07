@@ -1,21 +1,49 @@
 <template>
-  <div>
+  <div v-if="$vuetify.breakpoint.mdAndUp">
     <v-row dense>
       <v-col cols="4">
-        <TwoGauges :endpoint="`${sensorEndpoint}501`"/>
+        <TwoGauges :endpoint="`${sensorEndpoint}501`" />
       </v-col>
       <v-col cols="4">
-        <TwoGauges :endpoint="`${sensorEndpoint}502`"/>
+        <TwoGauges :endpoint="`${sensorEndpoint}502`" />
       </v-col>
       <v-col cols="4">
-        <LevelGauge :endpoint="`${sensorEndpoint}505`"/>
+        <LevelGauge :endpoint="`${sensorEndpoint}505`" />
       </v-col>
     </v-row>
     <v-card class="temperature-humidity">
       <v-card-subtitle class="headline">
         <h6>Latest Update Data Information</h6>
       </v-card-subtitle>
-      <Table/>
+      <Table />
+    </v-card>
+  </div>
+  <div v-else>
+    <v-row dense>
+      <v-col cols="12">
+        <v-select v-model="selectedComponent" :items="componentOptions" label="Select a View"></v-select>
+      </v-col>
+    </v-row>
+    <v-row dense v-if="selectedComponent === 'Office'">
+      <v-col cols="12">
+        <TwoGauges :endpoint="`${sensorEndpoint}501`" />
+      </v-col>
+    </v-row>
+    <v-row dense v-if="selectedComponent === 'Soil'">
+      <v-col cols="12">
+        <TwoGauges :endpoint="`${sensorEndpoint}502`" />
+      </v-col>
+    </v-row>
+    <v-row dense v-if="selectedComponent === 'Ultrasonic'">
+      <v-col cols="12">
+        <LevelGauge :endpoint="`${sensorEndpoint}505`" />
+      </v-col>
+    </v-row>
+    <v-card v-if="selectedComponent === 'Summary'" class="temperature-humidity">
+      <v-card-subtitle class="headline">
+        <h6>Latest Update Data Information</h6>
+      </v-card-subtitle>
+      <Table />
     </v-card>
   </div>
 </template>
@@ -33,6 +61,12 @@ export default {
     TwoGauges,
     Table
   },
+  data() {
+    return {
+      selectedComponent: null,
+      componentOptions: ['Office', 'Soil', 'Ultrasonic', 'Summary']
+    }
+  },
   computed: {
     ...mapState(['sensorEndpoint'])
   }
@@ -46,8 +80,8 @@ export default {
 }
 
 .headline {
-  color:#FBC02D;
-  text-align: left; 
+  color: #FBC02D;
+  text-align: left;
   line-height: 1.3;
   margin-bottom: 5px;
 }

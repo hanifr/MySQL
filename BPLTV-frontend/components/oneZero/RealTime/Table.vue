@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="$vuetify.breakpoint.mdAndUp">
       <v-card class="table-card" flat>
         <!-- <div v-if="$vuetify.breakpoint.xsOnly" style="display: inline-block;"><DatabaseInfo/></div> -->
         <v-simple-table class="mt-4 custom-table">
@@ -154,7 +154,7 @@
       font-size: 11px !important;
     }
     .table-card {
-    height: 500px; /* set the desired height */
+    height: 300px; /* set the desired height */
     overflow: auto;
   }
   }
