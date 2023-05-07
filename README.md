@@ -54,3 +54,9 @@ Finally execute the following command
 ```
 docker-compose --env-file .env up -d
 ```
+
+To troubleshoot MySQL container, launch CMD and use the following command
+```
+docker exec -it sql mysql -u root -p
+```
+Note: -p is password that that you use to create the .env file
