@@ -2,52 +2,40 @@
 
 To set up the environment, follow these steps:
 
-\`\`\`
 $ sudo -i
 $ git clone https://github.com/hanifr/MySQL.git
 $ cd MySQL
 $ chmod +x init.sh
 $ ./init.sh
-\`\`\`
 
 ### What it does
+The \`init.sh\` script is intended for deploying docker environment in OrangePi. For Linux and MacOS users, you can download and install Docker-Desktop first and then run \` ./createENV.sh \`
 
-The \`init.sh\` script does the following:
-
+The \`init.sh\` script will execute the following
 1. Installs Docker and Docker Compose libraries on the host machine.
 2. Creates a \`.env\` file in the same directory as the script.
 3. Adds the required environment variables to the \`.env\` file.
 4. Sets the file permissions of the \`.env\` file to be only readable by the current user.
 
-### Environment Variables
 
-The following environment variables are set in the \`.env\` file:
+\` ./createENV.sh \`
+This script creates a .env file for a project and sets the required environment variables.
 
-- \`Host\`: The hostname for the database.
-- \`Port\`: The port number for the database.
-- \`Database\`: The name of the database.
-- \`Username\`: The username for the database.
-- \`Password\`: The password for the database.
+Usage
+This repository contains a \`createENV.sh\` script that creates a .env file for a project and sets the required environment variables. To use this script, run the following command:
 
-If you wish to change the above setup, execute the following command:
+./createENV.sh
 
-\`\`\`
-$ nano init.sh
-\`\`\`
+This will create a .env file in the current directory and set the following environment variables:
 
-Change the parameters as you wish.
+DB_PORT: the port number for the database server (default: 3300)
+DB_NAME: the name of the database (default: tracker)
+DB_USER: the username for the database (default: orangepi)
+DB_PASSWORD: the password for the database (default: orangepi)
+Customizing Environment Variables
+You can customize the environment variables by running the script with command line arguments. The available options are:
 
-To start the containers, run the following command:
-
-\`\`\`
-docker-compose up -d
-\`\`\`
-
-To access the MySQL database, connect to the MySQL container using the following details:
-
-- Host: \`localhost\`
-- Port: \`\${DB_PORT}\`\`
-- Database: \`\${DB_NAME}\`\`
-- Username: \`\${DB_USER}\`\`
-- Password: \`${DB_PASSWORD}\`\`
-
+--port: sets the port number for the database server
+--name: sets the name of the database
+--user: sets the username for the database
+--password: sets the password for the database

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Timex from "../components/current/Utils/rtc.vue";
+import Timex from "../components/Utils/rtc.vue";
 import Footer from "../components/Footer.vue";
 import { mapState, mapMutations } from "vuex";
 
