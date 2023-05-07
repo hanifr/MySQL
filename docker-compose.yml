@@ -10,8 +10,8 @@ services:
     environment:
       TZ: Asia/Kuala_Lumpur
       NODE_RED_ENABLE_PROJECTS: "true"
-    command: >
-      bash -c "npm install node-red-dashboard node-red-node-mysql && npm start"
+      NODE_RED_ENABLE_SAFE_MODE: "false"
+    command: npm install node-red-dashboard node-red-node-mysql
     networks:
       - net-backend
       - net-web

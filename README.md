@@ -49,3 +49,8 @@ You can customize the environment variables by running the script with command l
 --user: sets the username for the database
 --password: sets the password for the database
 ```
+
+Finally execute the following command
+```
+docker-compose --env-file .env up -d
+```
