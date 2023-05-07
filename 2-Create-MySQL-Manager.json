@@ -1,0 +1,139 @@
+[
+    {
+        "id": "162bb22097c958da",
+        "type": "mysql",
+        "z": "f6f2187d.f17ca8",
+        "mydb": "bd89b02c91b0064a",
+        "name": "sensor data",
+        "x": 830,
+        "y": 900,
+        "wires": [
+            [
+                "d4cf62e992401fd2",
+                "dc81dc206d4489d0"
+            ]
+        ]
+    },
+    {
+        "id": "5a8db5375b919a04",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Create sensor_data",
+        "func": "msg.topic = \"CREATE TABLE sensor_data (TID VARCHAR(150) NOT NULL, TMP DECIMAL(16,2) DEFAULT '0.00' NOT NULL, RH DECIMAL(16,2) DEFAULT '0.00' NOT NULL, timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP )\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 900,
+        "wires": [
+            [
+                "162bb22097c958da"
+            ]
+        ]
+    },
+    {
+        "id": "97664d1bba830ac0",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "CREATE table sensor_data",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 330,
+        "y": 900,
+        "wires": [
+            [
+                "5a8db5375b919a04"
+            ]
+        ]
+    },
+    {
+        "id": "d4cf62e992401fd2",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 42",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "7a1c1cb7960fa706",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Describe sensor_data",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Describe sensor_data",
+        "x": 560,
+        "y": 940,
+        "wires": [
+            [
+                "162bb22097c958da"
+            ]
+        ]
+    },
+    {
+        "id": "65706cd87047f6fd",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Drop table sensor_data",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Drop table sensor_data",
+        "x": 560,
+        "y": 980,
+        "wires": [
+            [
+                "162bb22097c958da"
+            ]
+        ]
+    },
+    {
+        "id": "bd89b02c91b0064a",
+        "type": "MySQLdatabase",
+        "name": "SQL",
+        "host": "192.168.8.197",
+        "port": "3300",
+        "db": "tracker",
+        "tz": "Asia/Kuala_Lumpur",
+        "charset": "UTF8"
+    }
+]

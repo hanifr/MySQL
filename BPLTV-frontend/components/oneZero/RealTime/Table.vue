@@ -1,7 +1,6 @@
 <template>
     <div v-if="$vuetify.breakpoint.mdAndUp">
       <v-card class="table-card" flat>
-        <!-- <div v-if="$vuetify.breakpoint.xsOnly" style="display: inline-block;"><DatabaseInfo/></div> -->
         <v-simple-table class="mt-4 custom-table">
           <thead>
             <tr>
@@ -27,6 +26,9 @@
         </v-simple-table>
       </v-card>
     </div>
+    <div v-else>
+
+    </div>
   </template>
   
   
@@ -36,9 +38,6 @@
   // import DatabaseInfo from '../viewPages/leftPageDatabaseInfo.vue';
   import axios from "axios"; 
     export default {
-      // components: {
-      //   DatabaseInfo
-      // },
       data() {
         return {
           data: [],
@@ -76,17 +75,11 @@
           const utcDate = new Date(timestamp);
           const malaysiaTimezoneOffset = 8; // Malaysia is UTC+8
           const malaysiaDate = new Date(utcDate.getTime() - (malaysiaTimezoneOffset * 60 * 60 * 1000));
-          // const options = { timeZone: 'Asia/Kuala_Lumpur', timeStyle: 'medium', dateStyle: 'medium' };
-          
-          // const options = { timeZone: 'Asia/Kuala_Lumpur', timeStyle: 'medium', dateStyle: 'medium' };
-          // return malaysiaDate.toLocaleString('en-MY', options);
-          // return malaysiaDate.toLocaleString('en-MY', options).toUpperCase();
           return malaysiaDate.toLocaleString('en-MY', this.timestampOptions).toUpperCase();
         }
       }
     };
   </script>
-  <!-- <style scoped src="../../../assets/css/summaryTable.css"></style> -->
   
   <style scoped>
   .custom-card {

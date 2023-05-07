@@ -1,0 +1,109 @@
+[
+    {
+        "id": "d3c2dcfed57adbdd",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "ea/datc/s/data",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f77a3f58af749b8d",
+        "x": 720,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "20a66902b4b2b77e",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 460,
+        "y": 580,
+        "wires": [
+            [
+                "d3c2dcfed57adbdd"
+            ]
+        ]
+    },
+    {
+        "id": "7a52b2b95762e87d",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "ea/datc/s/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f77a3f58af749b8d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 440,
+        "y": 640,
+        "wires": [
+            [
+                "1585a01bd9a70991"
+            ]
+        ]
+    },
+    {
+        "id": "1585a01bd9a70991",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 43",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "f77a3f58af749b8d",
+        "type": "mqtt-broker",
+        "name": "ZR",
+        "broker": "zr.txio.live",
+        "port": "1880",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

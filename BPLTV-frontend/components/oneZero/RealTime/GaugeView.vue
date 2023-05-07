@@ -37,6 +37,7 @@
     <v-row dense v-if="selectedComponent === 'Ultrasonic'">
       <v-col cols="12">
         <LevelGauge :endpoint="`${sensorEndpoint}505`" />
+          <IndividualTable/>
       </v-col>
     </v-row>
     <v-card v-if="selectedComponent === 'Summary'" class="temperature-humidity">
@@ -44,6 +45,7 @@
         <h6>Latest Update Data Information</h6>
       </v-card-subtitle>
       <Table />
+      <IndividualTable/>
     </v-card>
   </div>
 </template>
@@ -51,6 +53,7 @@
 <script>
 import { mapState } from 'vuex';
 import Table from '../RealTime/Table.vue';
+import IndividualTable from './IndividualTable.vue';
 import TwoGauges from '../RealTime/TwoGauges.vue';
 import LevelGauge from './LevelGauge.vue';
 
@@ -59,7 +62,8 @@ export default {
   components: {
     LevelGauge,
     TwoGauges,
-    Table
+    Table,
+    IndividualTable
   },
   data() {
     return {
