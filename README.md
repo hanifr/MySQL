@@ -30,11 +30,12 @@ This repository contains a \`createENV.sh\` script that creates a .env file for 
 ```
 
 This will create a .env file in the current directory and set the following environment variables:
-
+```
 DB_PORT: the port number for the database server (default: 3300)
 DB_NAME: the name of the database (default: tracker)
 DB_USER: the username for the database (default: orangepi)
 DB_PASSWORD: the password for the database (default: orangepi)
+```
 Customizing Environment Variables
 You can customize the environment variables by running the script with command line arguments. The available options are:
 
