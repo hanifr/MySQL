@@ -1,0 +1,25 @@
+{
+  "name": "temperature-relative-humidity-monitoring-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.12.2",
+    "core-js": "^3.6.5",
+    "echarts": "^5.3.3",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.28",
+    "mqtt": "^4.3.7",
+    "nuxt": "^2.14.6",
+    "vue": "2.7.8",
+    "vue-server-renderer": "2.7.8"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.2"
+  }
+}

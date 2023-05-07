@@ -1,0 +1,72 @@
+  
+  .custom-table {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .custom-cell {
+    font-size: small;
+    text-shadow: 2px 1px black;
+  }
+  
+  .custom-row {
+    background-color: #F5F5F5;
+  }
+  
+  .note {
+    text-align: left;
+    font-size: small;
+    padding-top: 1rem;
+  }
+  
+  .note span {
+    font-weight: bold;
+  }
+  
+  .note span.low {
+    color: #84FFFF;
+  }
+  
+  .note span.good {
+    color: #C6FF00;
+  }
+  
+  .note span.high {
+    color: #FF5252;
+  }
+
+  .temp-low {
+    color: #84FFFF;
+  }
+  
+  .temp-good {
+    color: #C6FF00;
+  }
+  
+  .temp-high {
+    color: #FF5252;
+  }
+  
+  .rh-low {
+    color: #FBC02D;
+  }
+  
+  .rh-good {
+    color: #C6FF00;
+  }
+  
+  .rh-high {
+    color: #B388FF;
+  }
+  
+  @media (min-width: 100%) {
+    .custom-table {
+      width: 80%;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .custom-cell {
+      font-size: 11px !important;
+    }
+  }
