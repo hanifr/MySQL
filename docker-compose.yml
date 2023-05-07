@@ -9,6 +9,9 @@ services:
       - "1800:1880"
     environment:
       TZ: Asia/Kuala_Lumpur
+      NODE_RED_ENABLE_PROJECTS: "true"
+    command: >
+      bash -c "npm install node-red-dashboard node-red-node-mysql && npm start"
     networks:
       - net-backend
       - net-web
