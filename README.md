@@ -2,11 +2,15 @@
 
 To set up the environment, follow these steps:
 ```
-$ sudo -i
-$ git clone https://github.com/hanifr/MySQL.git
-$ cd MySQL
-$ chmod +x init.sh
-$ ./init.sh
+sudo -i
+
+git clone https://github.com/hanifr/MySQL.git
+
+cd MySQL
+
+chmod +x init.sh
+
+./init.sh
 ```
 
 ### What it does
