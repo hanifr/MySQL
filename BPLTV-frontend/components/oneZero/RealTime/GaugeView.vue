@@ -27,17 +27,19 @@
     <v-row dense v-if="selectedComponent === 'Office'">
       <v-col cols="12">
         <TwoGauges :endpoint="`${sensorEndpoint}501`" />
+        <IndividualTable :sensorEndpoint="`${sensorEndpoint}501`"/>
       </v-col>
     </v-row>
     <v-row dense v-if="selectedComponent === 'Soil'">
       <v-col cols="12">
         <TwoGauges :endpoint="`${sensorEndpoint}502`" />
+        <IndividualTable :sensorEndpoint="`${sensorEndpoint}502`"/>
       </v-col>
     </v-row>
     <v-row dense v-if="selectedComponent === 'Ultrasonic'">
       <v-col cols="12">
         <LevelGauge :endpoint="`${sensorEndpoint}503`" />
-          <IndividualTable/>
+          <IndividualTable :sensorEndpoint="`${sensorEndpoint}503`"/>
       </v-col>
     </v-row>
     <v-card v-if="selectedComponent === 'Summary'" class="temperature-humidity">
@@ -45,7 +47,6 @@
         <h6>Latest Update Data Information</h6>
       </v-card-subtitle>
       <Table />
-      <IndividualTable/>
     </v-card>
   </div>
 </template>

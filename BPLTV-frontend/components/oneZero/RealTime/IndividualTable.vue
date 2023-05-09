@@ -5,16 +5,16 @@
           <thead>
             <tr>
               <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #C6FF00;">TID</th>
-              <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #40C4FF;">TMP</th>
-              <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #40C4FF;">RH</th>
+              <!-- <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #40C4FF;">TMP</th> -->
+              <!-- <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #40C4FF;">RH</th> -->
               <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #C6FF00;">Last Update</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(datum, index) in data" :key="datum.TID" :class="{ 'custom-row': index % 2 === 0 }">
               <td class="custom-cell">{{ datum.TID }}</td>
-              <td class="custom-cell" :style="{ color: datum.TMP < 22 ? '#84FFFF' : datum.TMP > 27 ? '#FF5252' : '#C6FF00' }">{{ datum.TMP }}°C</td>
-              <td class="custom-cell" :style="{ color: datum.RH < 40 ? '#FBC02D' : datum.RH > 70 ? '#B388FF' : '#C6FF00' }">{{ datum.RH }}%</td>
+              <!-- <td class="custom-cell" :style="{ color: datum.TMP < 22 ? '#84FFFF' : datum.TMP > 27 ? '#FF5252' : '#C6FF00' }">{{ datum.TMP }}°C</td> -->
+              <!-- <td class="custom-cell" :style="{ color: datum.RH < 40 ? '#FBC02D' : datum.RH > 70 ? '#B388FF' : '#C6FF00' }">{{ datum.RH }}%</td> -->
               <td class="custom-cell">{{ formatTimestamp(datum.timestamp) }}</td>
             </tr>
           </tbody>
@@ -23,20 +23,19 @@
     </div>
   </template>
 <script>  
-  import { mapState } from 'vuex';
   import axios from "axios"; 
     export default {
-      data() {
-        return {
-          data: [],
-        };
-      },
+        props: {
+            sensorEndpoint: String
+        },
+        data() {
+                return {
+                data: [],
+                };
+            },
       mounted() {
         setInterval(async () => {
-            const endpoints = [
-                this.sensorEndpoint + "501"
-            ];
-            const response = await axios.get(endpoints[0]);
+            const response = await axios.get(this.sensorEndpoint);
             if (response.status !== 200) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -54,7 +53,6 @@
               return { timeZone: 'Asia/Kuala_Lumpur', timeStyle: 'medium', dateStyle: 'medium' };
               }
           },
-          ...mapState(['sensorEndpoint'])
       },
       methods: {
         formatTimestamp(timestamp) {
