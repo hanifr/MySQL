@@ -5,7 +5,7 @@
   </template>
   
   <script>
-  import option from '~/assets/chartOptions/optionGaugeSimple.js'
+  import option from '~/assets/chartOptions/optionInvertGaugeSimple.js'
   export default {
     data() {
       return {

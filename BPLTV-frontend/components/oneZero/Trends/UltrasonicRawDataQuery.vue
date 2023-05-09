@@ -106,7 +106,7 @@ import 'jspdf-autotable';
         console.log(sqlQuery);
         this.loading = true;
         try {
-          const response = await fetch(`${this.sensorQueryEndpoint}${sqlQuery}`);
+          const response = await fetch(`${this.ultrasonicSensorQueryEndpoint}${sqlQuery}`);
           const data = await response.json();
           this.queriedData = data;
           // Convert the data to a CSV file
@@ -169,13 +169,12 @@ import 'jspdf-autotable';
 
             // Add Description page
             doc.setFontSize(18);
-            doc.text('Description of Thermal Data', 20, 135);
+            doc.text('Description of Water Level Data', 20, 135);
             doc.setFontSize(12);
             const maxWidth = 170;
             const lineHeight = 7;
-            const overview = `The thermal data provides important insights into temperature and relative humidity values that are crucial for analyzing and optimizing the performance of systems and equipment affected by these factors. By analyzing this data, patterns and trends can be identified, which can lead to improved performance and cost savings.`;
-            // const description = `The thermal data provides information about the minimum, average, and maximum temperature and relative humidity values. The columns "min_TMP," "avg_TMP," and "max_TMP" correspond to the minimum, average, and maximum temperature values, respectively. Similarly, "min_RH," "avg_RH," and "max_RH" represent the minimum, average, and maximum relative humidity values. This data is essential for gaining insight into the thermal characteristics of a system or environment. The data helps to analyze and optimize the performance of systems and equipment that are affected by temperature and humidity. The information can be used to identify patterns and trends in the data that can lead to improved performance and cost savings. The data is presented in an easy-to-read format, making it accessible to a wide range of users.`;
-            const conclusion = `This data can help optimize the performance of systems and equipment that are affected by temperature and humidity. The patterns and trends in the data can provide valuable insights that can help improve performance and save costs. The data is presented in a format that is easy to understand, making it accessible to a wide range of users.`;
+            const overview = `Accurate information on water level conditions is essential for analyzing trends and identifying patterns that can help inform decision-making. Data plays a crucial role in providing these insights, enabling us to better understand changes in water levels over time. By examining this data, we can gain a more comprehensive understanding of the factors that contribute to fluctuations in water levels and make more informed decisions about water resource management. In this context, the analysis of water level data is an important tool for environmental scientists, policymakers, and other stakeholders concerned with managing water resources effectively.`;
+            const conclusion = ``;
             // let splitDescription = doc.splitTextToSize(description, maxWidth);
             let splitOverview = doc.splitTextToSize(overview, maxWidth);
             let splitConclusion = doc.splitTextToSize(conclusion, maxWidth);
@@ -221,20 +220,19 @@ import 'jspdf-autotable';
         }
     },
     computed: {
-        ...mapState(['sensorQueryEndpoint']),
+        ...mapState(['ultrasonicSensorQueryEndpoint']),
         sqlQuery() {
             if (this.queryType === 'date') {
-                return `SELECT * FROM sensor_data WHERE  TID = '${this.id}' AND DATE(timestamp) BETWEEN '${this.fromDate} ${this.fromTime}:00' AND '${this.untilDate} ${this.untilTime}:59'`;
+                return `SELECT * FROM ultrasonic_data WHERE  TID = '${this.id}' AND DATE(timestamp) BETWEEN '${this.fromDate} ${this.fromTime}:00' AND '${this.untilDate} ${this.untilTime}:59'`;
             } else {
                 const today = new Date().toISOString().slice(0, 10);
-                return `SELECT * FROM sensor_data WHERE  TID = '${this.id}' AND DATE(timestamp) = '${today}' AND TIME(timestamp) BETWEEN '${this.fromTime}:00' AND '${this.untilTime}:59'`;
+                return `SELECT * FROM ultrasonic_data WHERE  TID = '${this.id}' AND DATE(timestamp) = '${today}' AND TIME(timestamp) BETWEEN '${this.fromTime}:00' AND '${this.untilTime}:59'`;
             }
             },
         headers() {
             return [
             { text: 'Timestamp', value: 'timestamp' },
-            { text: 'Temperature', value: 'TMP' },
-            { text: 'Relative Humidity', value: 'RH' },
+            { text: 'Water Level', value: 'ULT' },
             ]
         },
     }

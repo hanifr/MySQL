@@ -17,7 +17,8 @@ export const state = () => ({
   // sensorEndpoint: 'https://nr.txio.live/sensor/',
   // sensorQueryEndpoint: 'https://nr.txio.live/api/query'
   sensorEndpoint: 'http://localhost:1800/sensor/',
-  sensorQueryEndpoint: 'http://localhost:1800/api/query/'
+  sensorQueryEndpoint: 'http://localhost:1800/api/query/',
+  ultrasonicSensorQueryEndpoint: 'http://localhost:1800/ultrasonic/query/',
 });
 
 

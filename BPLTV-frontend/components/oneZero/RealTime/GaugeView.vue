@@ -8,7 +8,7 @@
         <TwoGauges :endpoint="`${sensorEndpoint}502`" />
       </v-col>
       <v-col cols="4">
-        <LevelGauge :endpoint="`${sensorEndpoint}505`" />
+        <LevelGauge :endpoint="`${sensorEndpoint}503`" />
       </v-col>
     </v-row>
     <v-card class="temperature-humidity">
@@ -36,7 +36,7 @@
     </v-row>
     <v-row dense v-if="selectedComponent === 'Ultrasonic'">
       <v-col cols="12">
-        <LevelGauge :endpoint="`${sensorEndpoint}505`" />
+        <LevelGauge :endpoint="`${sensorEndpoint}503`" />
           <IndividualTable/>
       </v-col>
     </v-row>

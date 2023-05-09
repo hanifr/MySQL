@@ -26,7 +26,7 @@
   <script>
   import Trends from '../Trends/TrendsAnalytics.vue';
   import GaugeView from '../RealTime/GaugeView.vue';
-  import rawDataQuery from '../Trends/RawDataQuery.vue';
+  import rawDataQuery from '../Trends/RawDataQueryPage.vue';
   
   export default {
     name: 'center-summary',

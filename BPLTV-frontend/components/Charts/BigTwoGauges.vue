@@ -100,7 +100,7 @@
             type: "gauge",
             radius: "70%",
             min: 0,
-            max: 100,
+            max: 40,
             startAngle: 135,
             endAngle: 45,
             splitNumber: 2,
