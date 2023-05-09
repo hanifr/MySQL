@@ -71,7 +71,7 @@ import { mapState } from 'vuex';
         return {
           chartData: [],
           selectedType: '501',
-          types: ['501', '502', '505'],
+          types: ['501', '502'],
           selectedTrend: 'Daily',
           trendTypes: ['Daily', 'Weekly','Monthly'],
           menu: false

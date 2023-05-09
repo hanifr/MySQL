@@ -1,63 +1,46 @@
 <template>
-    <div v-if="$vuetify.breakpoint.mdAndUp">
+    <div>
       <v-card class="table-card" flat>
         <v-simple-table class="mt-4 custom-table">
           <thead>
             <tr>
               <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #C6FF00;">TID</th>
-              <!-- <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #40C4FF;">TMP</th>
-              <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #40C4FF;">RH</th> -->
+              <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #40C4FF;">Ultrasonic</th>
               <th style=" text-align: center; font-size: small; text-shadow: 2px 1px black; color: #C6FF00;">Last Update</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(datum, index) in data" :key="datum.TID" :class="{ 'custom-row': index % 2 === 0 }">
               <td class="custom-cell">{{ datum.TID }}</td>
-              <!-- <td class="custom-cell" :style="{ color: datum.TMP < 22 ? '#84FFFF' : datum.TMP > 27 ? '#FF5252' : '#C6FF00' }">{{ datum.TMP }}°C</td>
-              <td class="custom-cell" :style="{ color: datum.RH < 40 ? '#FBC02D' : datum.RH > 70 ? '#B388FF' : '#C6FF00' }">{{ datum.RH }}%</td> -->
+              <td class="custom-cell" :style="{ color: datum.ULT < 220 ? '#FF5252' : datum.TMP > 400 ? '#84FFFF' : '#C6FF00' }">{{ datum.ULT }} cm</td>
               <td class="custom-cell">{{ formatTimestamp(datum.timestamp) }}</td>
             </tr>
-            <!-- <tr v-if="$vuetify.breakpoint.lgAndUp">
-              <td colspan="4" class="left-align" style="padding-top: 1rem;">
-                <h5>Note: The values of each parameter are updated every minute, the "Last Update" column shows the timestamp of the most recent data received.</h5> 
-              </td>
-            </tr> -->
           </tbody>
         </v-simple-table>
       </v-card>
     </div>
-    <div v-else>
-
-    </div>
   </template>
-  
-  
-   
-  <script>  
-  import { mapState } from 'vuex';
-  // import DatabaseInfo from '../viewPages/leftPageDatabaseInfo.vue';
+<script>  
   import axios from "axios"; 
     export default {
-      data() {
-        return {
-          data: [],
-        };
-      },
+        props: {
+            sensorEndpoint: String
+        },
+        data() {
+                return {
+                data: [],
+                };
+            },
       mounted() {
-        setInterval(() => {
-            const endpoints = [
-            this.sensorEndpoint + "501",
-            this.sensorEndpoint + "502",
-            this.sensorEndpoint + "503",
-            ];
-          const requests = endpoints.map((endpoint) => axios.get(endpoint));
-          Promise.all(requests).then((responses) => {
-              // use of Array.prototype.concat() to flatten the array of arrays into a single array. 
-            this.data = [].concat(...responses.map((response) => response.data));
-            // console.log(this.data);
-          });
-        }, 10000);
-      },
+        setInterval(async () => {
+            const response = await axios.get(this.sensorEndpoint);
+            if (response.status !== 200) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = response.data;
+            this.data = data;
+            }, 10000);
+        },
       computed: {
           timestampOptions() {
               if (window.innerWidth <= 600) {
@@ -68,7 +51,6 @@
               return { timeZone: 'Asia/Kuala_Lumpur', timeStyle: 'medium', dateStyle: 'medium' };
               }
           },
-          ...mapState(['sensorEndpoint'])
       },
       methods: {
         formatTimestamp(timestamp) {
@@ -146,10 +128,6 @@
     .custom-cell {
       font-size: 11px !important;
     }
-    .table-card {
-    height: 300px; /* set the desired height */
-    overflow: auto;
-  }
   }
   
   </style>

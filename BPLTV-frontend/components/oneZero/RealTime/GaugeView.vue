@@ -21,7 +21,9 @@
   <div v-else>
     <v-row dense>
       <v-col cols="12">
-        <v-select v-model="selectedComponent" :items="componentOptions" label="Select a View"></v-select>
+        <v-select v-model="selectedComponent" 
+        :items="componentOptions" 
+        label="Select a View"></v-select>
       </v-col>
     </v-row>
     <v-row dense v-if="selectedComponent === 'Office'">
@@ -46,7 +48,9 @@
       <v-card-subtitle class="headline">
         <h6>Latest Update Data Information</h6>
       </v-card-subtitle>
-      <Table />
+      <IndividualTableThermal :sensorEndpoint="`${sensorEndpoint}501`"/>
+      <IndividualTableThermal :sensorEndpoint="`${sensorEndpoint}502`"/>
+      <IndividualTableUltrasonic :sensorEndpoint="`${sensorEndpoint}503`"/>
     </v-card>
   </div>
 </template>
@@ -57,6 +61,8 @@ import Table from '../RealTime/Table.vue';
 import IndividualTable from './IndividualTable.vue';
 import TwoGauges from '../RealTime/TwoGauges.vue';
 import LevelGauge from './LevelGauge.vue';
+import IndividualTableThermal from './IndividualTableThermal.vue';
+import IndividualTableUltrasonic from './IndividualTableUltrasonic.vue';
 
 export default {
   name: 'center-summary',
@@ -64,7 +70,9 @@ export default {
     LevelGauge,
     TwoGauges,
     Table,
-    IndividualTable
+    IndividualTable,
+    IndividualTableThermal,
+    IndividualTableUltrasonic
   },
   data() {
     return {

@@ -1,6 +1,6 @@
 <template>
     <div class="level">
-      <div :id="this.id" style="width: 100%; height: 150px" :data="data"></div>
+      <div :id="this.id" style="width: 100%; height: 180px" :data="data"></div>
     </div>
   </template>
   
